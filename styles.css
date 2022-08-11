@@ -7,6 +7,7 @@ body{
     padding-top: 32px;
     padding-left: 16px;
     padding-right: 16px;
+    padding-bottom: 32px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -28,6 +29,13 @@ body{
     margin-top: 16px;
     padding: 16px;
     max-width: 730px;
+}
+.mainConteinerReply{
+    background-color: white;
+    border-radius: 8px;
+    margin-top: 16px;
+    padding: 16px;
+    max-width: 630px;
 }
 .headerImage{
     width: 32px;
@@ -115,14 +123,186 @@ body{
     margin-top: 16px;
     max-width: 730px;
     display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    max-height: 300px;
+}
+.you{
+    position: relative;
+    background: #5357B6;
+    border-radius: 2px;
+    color: white;
+    font-family: Rubik;
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 15px;
+    letter-spacing: 0px;
+    text-align: left;
+    padding: 3px;
+}
+.deleteText{
+    
+    font-family: Rubik;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 24px;
+    letter-spacing: 0px;
+    text-align: left;
+    color: #ED6368;
+    
+}
+.deleteF{
+    display: flex;
     flex-direction: row;
     justify-content: space-between;
+    align-items: center;
+    width: 76px;
+    margin-right: 16px;
+    
 }
-.hrline{
-    height: 100%;
+.deleteAndReply{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
 }
+.textArea{
+    width: 90%;
+    max-height: 96px;
+    padding: 20px;
+    font-family: Rubik;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    letter-spacing: 0px;
+    text-align: left;
+    color:#67727E;
+}
+.comentsSendDiv{
+    background-color: white;
+    border-radius: 8px;
+    margin-top: 16px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    position: relative;
+    width: 92%;
+}
+.buttonSend{
+    height: 48px;
+    width: 104px;
+    border-radius: 8px;
+    background: #5357B6;
+    font-family: Rubik;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 24px;
+    letter-spacing: 0px;
+    
+    color: #fff;
 
+
+}
+.sendButtonAndImg{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 16px;
+}
+.hrlineAndReplyDivs{
+   display: flex;
+   flex-direction: row-reverse;
+}
+.sizeofreply{
+    max-width: 630px;
+}
+.imgMove{
+    width: 32px;
+}
+.height{
+    height: 450px;
+}
+.deleteDiv{
+    height: 224px;
+    width: 343px;
+    border-radius: 8px;
+    background: #FFFFFF;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: absolute;
+    display: none;
+}
+.h1Text{
+    font-family: Rubik;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 24px;
+    letter-spacing: 0px;
+    text-align: left;
+    color: #334253;
+
+}
+.deleteText{
+    font-family: Rubik;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    letter-spacing: 0px;
+    text-align: left;
+    color: #67727E;
+}
+.deletButtons{
+    height: 48px;
+    width: 138px;
+    border-radius: 8px;
+    background: #67727E;
+    color: white;
+    font-family: Rubik;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 24px;
+    letter-spacing: 0px;
+    text-align: center;
+
+}
+.deleteButon{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+.deletButtonsred{
+    height: 48px;
+    width: 138px;
+    border-radius: 8px;
+    background: #ED6368;
+    color: white;
+    font-family: Rubik;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 24px;
+    letter-spacing: 0px;
+    text-align: center;
+}
 @media only screen and (min-width: 780px){
+    .hrline{
+        margin-left: 60px;
+    
+    }
+    .imgMove{
+        position: relative;
+        left:-500px;
+        top:-20px;
+    }
+    .sizeofreply{
+        margin-left: 73px;
+    }
     .incrDecrementAndReply{
         top:-140px;
     }
@@ -148,5 +328,50 @@ body{
     }
     .replyBigDiv{
         padding-left: 43px;
+        max-height: 200px;
     }
+    .comentsSendDiv{
+        width: 730px;
+        align-items: center;
+        max-height: 150px;
+        flex-direction: row;
+        align-items: flex-start;
+    }
+    .textArea{
+        width: 70%;
+        height: 130px;
+        position: relative;
+        left:40px;
+        padding: 20px;
+        font-family: Rubik;
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 24px;
+        letter-spacing: 0px;
+        text-align: left;
+
+    }
+    .sendButtonAndImg{
+        width: fit-content;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        margin-top: 16px;
+        position: relative;
+        justify-content: start;
+        align-self: flex-start;
+        
+        
+    }
+    .imgFOOter{
+        position: relative;
+        left:-600px;
+        top:-20px;
+    }
+    .buttonSend{
+        position: relative;
+        top:-15px;
+    }
+    
+    
 }
