@@ -177,6 +177,7 @@ body{
     letter-spacing: 0px;
     text-align: left;
     color:#67727E;
+    border-radius: 8px;
 }
 .comentsSendDiv{
     background-color: white;
@@ -224,7 +225,7 @@ body{
     width: 32px;
 }
 .height{
-    height: 450px;
+    height: 750px !important;
 }
 .deleteDiv{
     height: 224px;
@@ -290,6 +291,50 @@ body{
     letter-spacing: 0px;
     text-align: center;
 }
+.imgplus:hover{
+    cursor: pointer;
+    content: url(./images/+.png);
+}
+.imgminus:hover{
+    cursor: pointer;
+    content: url(./images/-.png);
+}
+.reply:hover .replyimg{
+    cursor: pointer;
+    content: url(./images/replyhover.png);
+}
+.reply:hover .replyText{
+    color:#C5C6EF;
+}
+.buttonSend{
+    border: none;
+}
+.buttonSend:hover{
+    background: #C5C6EF;
+}
+.textArea:hover{
+    cursor: pointer;
+    border: 1px solid #5357B6;
+}
+.reply:hover .edit{
+    cursor: pointer;
+    content: url(./images/edithover.png);
+}
+.reply:hover {
+    cursor: pointer;
+}
+.deleteF:hover .deleteimg{
+    content: url(./images/deletehover.png);
+    cursor: pointer;
+}
+.deleteF:hover .deleteText{
+    cursor: pointer;
+    color: #FFB8BB;
+}
+.hrline{
+    height: 450px;
+
+}
 @media only screen and (min-width: 780px){
     .hrline{
         margin-left: 60px;
@@ -314,7 +359,7 @@ body{
     .incDecrText{
         transform: rotate(-90deg);
     }
-    .imgplus{
+    .imgminus{
         transform: rotate(90deg);
     }
     .mainConteiner{

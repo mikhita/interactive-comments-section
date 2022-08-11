@@ -83,7 +83,7 @@ for(let i=0; i<data.comments.length; i++){
     incrDecrement.append(incDecrText);
 
     let imgminus = document.createElement("img");
-    imgminus.classList.add("imgplus");
+    imgminus.classList.add("imgminus");
     imgminus.setAttribute("src", "./images/icon-minus.svg");
     incrDecrement.append(imgminus);
 
@@ -98,6 +98,7 @@ for(let i=0; i<data.comments.length; i++){
 
     let replyimg = document.createElement("img");
     replyimg.setAttribute("src", "./images/icon-reply.svg");
+    replyimg.classList.add("replyimg");
     reply.append(replyimg);
 
     let replyText = document.createElement("p");
@@ -211,7 +212,7 @@ function replyArray(repleis){
         incrDecrement.append(incDecrText);
 
         let imgminus = document.createElement("img");
-        imgminus.classList.add("imgplus");
+        imgminus.classList.add("imgminus");
         imgminus.setAttribute("src", "./images/icon-minus.svg");
         incrDecrement.append(imgminus);
         if(repleis[i].id === 3){
@@ -221,15 +222,16 @@ function replyArray(repleis){
             reply.addEventListener('click', function(event){
                 if(comentsSendDiv.style.display === "none"){
                     comentsSendDiv.style.display = "flex";
-                    hrline.classList.remove("height");
-                }else {comentsSendDiv.style.display ="none";
                     hrline.classList.add("height");
+                }else {comentsSendDiv.style.display ="none";
+                    hrline.classList.remove("height");
                 }
 
             })
 
             let replyimg = document.createElement("img");
             replyimg.setAttribute("src", "./images/icon-reply.svg");
+            replyimg.classList.add("replyimg");
             reply.append(replyimg);
 
             let replyText = document.createElement("p");
@@ -247,6 +249,7 @@ function replyArray(repleis){
             deleteAndReply.append(deleteF);
 
             let deleteimg = document.createElement("img");
+            deleteimg.classList.add("deleteimg");
             deleteimg.setAttribute("src", "./images/icon-delete.svg");
             deleteF.append(deleteimg);
 
@@ -260,6 +263,7 @@ function replyArray(repleis){
             deleteAndReply.append(reply);
 
             let replyimg = document.createElement("img");
+            replyimg.classList.add("edit");
             replyimg.setAttribute("src", "./images/icon-edit.svg");
             reply.append(replyimg);
 
