@@ -1,12 +1,27 @@
 import data from "./data.json" assert {type: 'json'};
+
+data.comments[0].replies.push({
+    "id": 4,
+    "content": "I couldn't agree more with this. Everything moves so fast and it always seems like everyone knows the newest library/framework. But the fundamentals are what stay constant.",
+    "createdAt": "2 days ago",
+    "score": 2,
+    "replyingTo": "ramsesmiron",
+    "user": {
+      "image": { 
+        "png": "./images/avatars/image-juliusomo.png",
+        "webp": "./images/avatars/image-juliusomo.webp"
+      },
+      "username": "juliusomo"
+    }
+  });
+  
 let comentsConteiner = document.querySelector(".comentsConteiner");
 let hrlineAndReplyDivs = document.querySelector(".hrlineAndReplyDivs");
-let forDivsAndreplyes = document.querySelector(".forDivsAndreplyes");
 let deleteDiv = document.querySelector(".deleteDiv");
 let backdrop = document.querySelector(".backdrop");
 let deletButtons = document.querySelector(".deletButtons");
 let deletButtonsred = document.querySelector(".deletButtonsred");
-
+let replyId = 4;
 
 
 
@@ -20,10 +35,9 @@ deletButtons.addEventListener('click', function(event){
 for(let i=0; i<data.comments.length; i++){
 
     
-
-
     let comment = data.comments[i];
     let maindiv = document.createElement("div");
+     
     
     let comentsSendDiv  = document.createElement("div");
     comentsSendDiv.classList.add("comentsSendDiv");
@@ -40,6 +54,7 @@ for(let i=0; i<data.comments.length; i++){
     sendButtonAndImg.classList.add("sendButtonAndImg");
     comentsSendDiv.append(sendButtonAndImg); 
     
+    
     let imgFOOter = document.createElement("img");
     imgFOOter.classList.add("imgFOOter");
     imgFOOter.classList.add("headerImage");
@@ -50,6 +65,9 @@ for(let i=0; i<data.comments.length; i++){
     buttonSend.classList.add("buttonSend");
     buttonSend.innerText = "Reply";
     sendButtonAndImg.append(buttonSend);
+    buttonSend.addEventListener('click',function(event){
+        addReply(event, comment );
+    })
     
     
 
@@ -121,15 +139,15 @@ for(let i=0; i<data.comments.length; i++){
     reply.append(replyText);
     
     comentsConteiner.appendChild(maindiv);
+    replyArray(comment.replies);
     comentsConteiner.append(comentsSendDiv);
 
-    replyArray(comment.replies);
+    
     
 }
 
 function replyArray(repleis){
     for(let i=0; i<repleis.length; i++){
-        
         
         let replyBigDiv = document.createElement("div");
         replyBigDiv.classList.add("replyBigDiv");
@@ -139,11 +157,14 @@ function replyArray(repleis){
         replyBigDiv.append(maindiv);
 
         
-        let hrline = document.createElement("img");
-        hrline.classList.add("hrline");
-        hrline.setAttribute("src", "./images/line throu.png");
-        hrlineAndReplyDivs.append(hrline);
+        // let hrline = document.createElement("img");
+        // hrline.classList.add("hrline");
+        // hrline.setAttribute("src", "./images/line throu.png");
+        // hrlineAndReplyDivs.append(hrline);
 
+        let forDivsAndreplyes = document.createElement("div");
+        forDivsAndreplyes.classList.add("forDivsAndreplyes");
+        comentsConteiner.append(forDivsAndreplyes);
 
 
         let comentsSendDiv  = document.createElement("div");
@@ -298,15 +319,38 @@ function replyArray(repleis){
         forDivsAndreplyes.append(comentsSendDiv);
         if(repleis[i].id === 4){
             comentsSendDiv.style.display = "none";
-            hrline.style.display = "none";
+            // hrline.style.display = "none";
             deletButtonsred.addEventListener('click', function(event){
-                replyBigDiv.style.display = "none";
-                deleteDiv.style.display = "none";
-                backdrop.style.display = "none";
+            replyBigDiv.style.display = "none";
+            deleteDiv.style.display = "none";
+            backdrop.style.display = "none";
             });
         }
 
 
         
     }
+}
+
+function addReply(event, comment ){
+    replyId+=1;
+    let textArea = event.target.parentElement.previousElementSibling;
+    let replyObject = {
+        "id": replyId,
+        "content": textArea.value,
+        "createdAt": "2 days ago",
+        "score": 2,
+        "replyingTo": comment.user.username,
+        "user": {
+          "image": { 
+            "png": "./images/avatars/image-juliusomo.png",
+            "webp": "./images/avatars/image-juliusomo.webp"
+          },
+          "username": "juliusomo"
+        }
+      }
+      comment.replies.push(replyObject);
+      
+      replyArray(comment.replies);
+      console.log(comment);
 }
