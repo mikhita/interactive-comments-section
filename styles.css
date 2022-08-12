@@ -4,6 +4,7 @@
     margin: 0;
 }
 body{
+    height:100%;
     padding-top: 32px;
     padding-left: 16px;
     padding-right: 16px;
@@ -334,6 +335,15 @@ body{
 .hrline{
     height: 450px;
 
+}
+.backdrop{
+    width:100vw;
+    height: 100vh;
+    position: absolute;
+    background-color: rgba(210, 210, 210, 0.5);
+    top:0;
+    left:0;
+    display: none;
 }
 @media only screen and (min-width: 780px){
     .hrline{

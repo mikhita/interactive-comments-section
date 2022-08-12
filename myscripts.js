@@ -2,6 +2,20 @@ import data from "./data.json" assert {type: 'json'};
 let comentsConteiner = document.querySelector(".comentsConteiner");
 let hrlineAndReplyDivs = document.querySelector(".hrlineAndReplyDivs");
 let forDivsAndreplyes = document.querySelector(".forDivsAndreplyes");
+let deleteDiv = document.querySelector(".deleteDiv");
+let backdrop = document.querySelector(".backdrop");
+let deletButtons = document.querySelector(".deletButtons");
+let deletButtonsred = document.querySelector(".deletButtonsred");
+
+
+
+
+deletButtons.addEventListener('click', function(event){
+                deleteDiv.style.display = "none";
+                backdrop.style.display = "none";
+                
+});
+
 
 for(let i=0; i<data.comments.length; i++){
 
@@ -247,6 +261,12 @@ function replyArray(repleis){
             let deleteF = document.createElement("div");
             deleteF.classList.add("deleteF");
             deleteAndReply.append(deleteF);
+            deleteF.addEventListener('click', function(event){
+                deleteDiv.style.display = "flex";
+                deleteDiv.style.background = "rgba(255,255,255, 1)";
+                backdrop.style.display = "block";
+                backdrop.style.height = "1500px";
+            });
 
             let deleteimg = document.createElement("img");
             deleteimg.classList.add("deleteimg");
@@ -279,6 +299,11 @@ function replyArray(repleis){
         if(repleis[i].id === 4){
             comentsSendDiv.style.display = "none";
             hrline.style.display = "none";
+            deletButtonsred.addEventListener('click', function(event){
+                replyBigDiv.style.display = "none";
+                deleteDiv.style.display = "none";
+                backdrop.style.display = "none";
+            });
         }
 
 
