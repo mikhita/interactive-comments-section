@@ -1,19 +1,5 @@
 import data from "./data.json" assert {type: 'json'};
 
-data.comments[0].replies.push({
-    "id": 4,
-    "content": "I couldn't agree more with this. Everything moves so fast and it always seems like everyone knows the newest library/framework. But the fundamentals are what stay constant.",
-    "createdAt": "2 days ago",
-    "score": 2,
-    "replyingTo": "ramsesmiron",
-    "user": {
-      "image": { 
-        "png": "./images/avatars/image-juliusomo.png",
-        "webp": "./images/avatars/image-juliusomo.webp"
-      },
-      "username": "juliusomo"
-    }
-  });
   
 let comentsConteiner = document.querySelector(".comentsConteiner");
 let hrlineAndReplyDivs = document.querySelector(".hrlineAndReplyDivs");
@@ -22,7 +8,6 @@ let backdrop = document.querySelector(".backdrop");
 let deletButtons = document.querySelector(".deletButtons");
 let deletButtonsred = document.querySelector(".deletButtonsred");
 let replyId = 4;
-
 
 
 deletButtons.addEventListener('click', function(event){
@@ -122,7 +107,10 @@ for(let i=0; i<data.comments.length; i++){
     let reply = document.createElement("div");
     reply.classList.add("reply");
     incrDecrementAndReply.append(reply);
+
     reply.addEventListener('click', function(event){
+        console.log("Reply event: ", event);
+
         if(comentsSendDiv.style.display === "none"){
             comentsSendDiv.style.display = "flex";
         }else {comentsSendDiv.style.display ="none"}
@@ -141,12 +129,11 @@ for(let i=0; i<data.comments.length; i++){
     comentsConteiner.appendChild(maindiv);
     replyArray(comment.replies);
     comentsConteiner.append(comentsSendDiv);
-
-    
     
 }
 
 function replyArray(repleis){
+    hrlineAndReplyDivs.innerHTML = "";
     for(let i=0; i<repleis.length; i++){
         
         let replyBigDiv = document.createElement("div");
@@ -164,8 +151,8 @@ function replyArray(repleis){
 
         let forDivsAndreplyes = document.createElement("div");
         forDivsAndreplyes.classList.add("forDivsAndreplyes");
-        comentsConteiner.append(forDivsAndreplyes);
-
+        
+        
 
         let comentsSendDiv  = document.createElement("div");
         comentsSendDiv.classList.add("comentsSendDiv");
@@ -257,9 +244,9 @@ function replyArray(repleis){
             reply.addEventListener('click', function(event){
                 if(comentsSendDiv.style.display === "none"){
                     comentsSendDiv.style.display = "flex";
-                    hrline.classList.add("height");
+                    // hrline.classList.add("height");
                 }else {comentsSendDiv.style.display ="none";
-                    hrline.classList.remove("height");
+                    // hrline.classList.remove("height");
                 }
 
             })
@@ -317,6 +304,7 @@ function replyArray(repleis){
         
         forDivsAndreplyes.appendChild(replyBigDiv);
         forDivsAndreplyes.append(comentsSendDiv);
+        hrlineAndReplyDivs.append(forDivsAndreplyes);
         if(repleis[i].id === 4){
             comentsSendDiv.style.display = "none";
             // hrline.style.display = "none";
@@ -352,5 +340,7 @@ function addReply(event, comment ){
       comment.replies.push(replyObject);
       
       replyArray(comment.replies);
-      console.log(comment);
+
+      
+      
 }
