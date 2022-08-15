@@ -141,7 +141,9 @@ body{
     color: #67727E;
     margin-top: 16px;
     margin-bottom: 16px;
-
+    word-wrap: break-word;
+     
+     
 }
 .incrDecrement{
     width: 100px;
@@ -433,26 +435,29 @@ body{
     left:0;
     display: none;
 }
+.incrDecrementALastaa {
+    position: relative;
+    top:0px;
+    
+}
+.comment_wrapper > .deleteAndReply {
+    position: static;
+    bottom: 0;
+    right: 0;
+}
 @media only screen and (min-width: 800px){
     .deleteF{
         position: relative;
         bottom: 140px;
         
     }
+
     .replyies, .replyBigDivAfter{
         padding-left: 80px;
     }
     .repl{
         bottom: 140px;
         
-    }
-    .incrDecrementAndReplyAfter{
-        position: relative;
-        top:50px;
-    }
-    .deleteAndReplyAfter{
-        position: relative;
-        top:10px;
     }
     .hrline{
         position: relative;
@@ -499,5 +504,18 @@ body{
         position: relative;
         bottom: 150px;
         left: 0px;
+    }
+    .comment_wrapper > .deleteAndReply{
+        position: relative;
+        top:200px;
+        right: 30px;
+    }
+    .incrDecrementALastaa {
+        position: relative;
+        top:-100px;
+        
+    }
+    .contentText{
+        height: 65px;
     }
 }

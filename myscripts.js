@@ -454,8 +454,8 @@ function addCommentNew() {
         "score": 12,
         "user": {
           "image": { 
-            "png": "./images/avatars/image-amyrobson.png",
-            "webp": "./images/avatars/image-amyrobson.webp"
+            "png": "./images/avatars/image-juliusomo.png",
+            "webp": "./images/avatars/image-juliusomo.webp"
           },
           "username": data.currentUser.username
         },
@@ -471,6 +471,7 @@ function addCommentNew() {
 
 document.getElementById('comment_send_btn').addEventListener('click', function(event) {
     addCommentNew();
+    document.getElementById("comment_textArea").value = "";
 });
 
 function drawComment(comment) {
@@ -545,20 +546,20 @@ function drawComment(comment) {
     imgminus.classList.add("imgminus");
     imgminus.setAttribute("src", "./images/icon-minus.svg");
     incrDecrement.append(imgminus);
-
+    if(avatarNames.innerHTML !== "juliusomo"){
     let reply = document.createElement("div");
     reply.classList.add("reply");
     incrDecrementAndReply.append(reply);
-    reply.addEventListener('click', function(event){
-        // console.log(sendButtonAndImg.style.display);
-        
-        if(sendButtonAndImg.style.display === "none"){
-          sendButtonAndImg.style.display = "flex";
-            
-    }else{sendButtonAndImg.style.display = "none";
-    }
+  reply.addEventListener('click', function(event){
 
-    });
+    
+    if(sendButtonAndImg.style.display === "none"){
+      sendButtonAndImg.style.display = "flex";
+        
+}else{sendButtonAndImg.style.display = "none";
+}
+
+});
 
     let replyimg = document.createElement("img");
     replyimg.setAttribute("src", "./images/icon-reply.svg");
@@ -569,7 +570,58 @@ function drawComment(comment) {
     replyText.innerHTML = "Reply";
     replyText.classList.add("replyText");
     reply.append(replyText);
+  } 
+  
+    if(avatarNames.innerHTML === "juliusomo"){
+      incrDecrement.classList.add("incrDecrementALastaa")
 
+      let deleteAndReply = document.createElement("div");
+      deleteAndReply.classList.add("deleteAndReply");
+      commentWrapper.append(deleteAndReply);
+
+      let deleteF = document.createElement("div");
+      deleteF.classList.add("deleteF");
+      deleteAndReply.append(deleteF);
+      deleteF.addEventListener('click', function(event){
+          deleteDiv.style.display = "flex";
+          deleteDiv.style.background = "rgba(255,255,255, 1)";
+          backdrop.style.display = "block";
+          backdrop.style.height = "1500px";
+          currentDivClick = event.target.parentElement.parentElement.parentElement;
+          console.log(currentDivClick);
+      });
+
+      deletButtonsred.addEventListener('click', function(event){
+        deleteDiv.style.display = "none";
+        backdrop.style.display = "none";
+        currentDivClick.remove();
+        
+      });
+
+      let deleteimg = document.createElement("img");
+      deleteimg.classList.add("deleteimg");
+      deleteimg.setAttribute("src", "./images/icon-delete.svg");
+      deleteF.append(deleteimg);
+
+      let deleteText = document.createElement("p");
+      deleteText.innerHTML = "Delete";
+      deleteText.classList.add("deleteText");
+      deleteF.append(deleteText);
+
+      let repl = document.createElement("div");
+          repl.classList.add("reply");
+          deleteAndReply.append(repl);
+
+          let replyimg = document.createElement("img");
+          replyimg.classList.add("edit");
+          replyimg.setAttribute("src", "./images/icon-edit.svg");
+          repl.append(replyimg);
+
+          let replyText = document.createElement("p");
+          replyText.innerHTML = "Edit";
+          replyText.classList.add("replyText");
+          repl.append(replyText);
+    }
     commentWrapper.append(commentD);
     commentWrapper.append(commentWrapperChild);
 
