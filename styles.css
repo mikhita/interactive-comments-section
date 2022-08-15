@@ -142,7 +142,8 @@ body{
     margin-top: 16px;
     margin-bottom: 16px;
     word-wrap: break-word;
-     
+    height: 65px;
+    overflow-y: scroll;
      
 }
 .incrDecrement{
@@ -441,9 +442,9 @@ body{
     
 }
 .comment_wrapper > .deleteAndReply {
-    position: static;
-    bottom: 0;
-    right: 0;
+    position: relative;
+    bottom: -197px;
+    right: 19px;
 }
 @media only screen and (min-width: 800px){
     .deleteF{

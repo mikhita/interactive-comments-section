@@ -332,7 +332,7 @@ function appendReplies(replies, commentId) {
 
         
 
-        if(avatarNames.innerHTML === "ramsesmiron"){
+        if(avatarNames.innerHTML !== "juliusomo"){
           let repl = document.createElement("div");
           repl.classList.add("repl");
           incrDecrementAndReply.append(repl);
@@ -355,19 +355,42 @@ function appendReplies(replies, commentId) {
 
             let buttonSend = document.createElement("button");
             buttonSend.classList.add("buttonSend");
+            buttonSend.id = "buttonSend_" + replies[i].id;
             buttonSend.innerText = "Reply";
             sendButtonAndImg.append(buttonSend);
-          repl.addEventListener('click', function(event){
+
+
+            repl.addEventListener('click', function(event){
             if(sendButtonAndImg.style.display === "none"){
               sendButtonAndImg.style.display = "flex";
                 
-        }else{sendButtonAndImg.style.display = "none";
-        }
-              
-            
-            
+              }else{sendButtonAndImg.style.display = "none";
+              }
+            });
 
-        })
+            document.getElementById('buttonSend_3').addEventListener('click', function(event) {
+             let newCommentReply= document.getElementById("textarea_3")
+              var misha =  {
+                "id": replyId,
+                "content":  newCommentReply.value,
+                "createdAt": "1 month ago",
+                "score": 12,
+                "user": {
+                  "image": { 
+                    "png": "./images/avatars/image-juliusomo.png",
+                    "webp": "./images/avatars/image-juliusomo.webp"
+                  },
+                  "username": data.currentUser.username
+                },
+                "replies": [
+                  
+                ]
+              };
+        
+        
+              drawCommentNew(misha);
+              newCommentReply.value = "@" + replies[i].user.username;
+            });
 
           let replyimg = document.createElement("img");
             replyimg.setAttribute("src", "./images/icon-reply.svg");
@@ -434,6 +457,197 @@ function appendReplies(replies, commentId) {
 }
 
 
+function drawCommentNew(comment){
+        let commentWrapper = document.createElement('div');
+    commentWrapper.classList.add("comment_wrapper");
+    commentWrapper.id = "comment_wrapper_" + comment.id;
+
+    let commentWrapperChild = document.createElement('div');
+    commentWrapperChild.classList.add("commentWrapperChild");
+    
+    let hrline = document.createElement("hr");
+    hrline.classList.add("hrline");
+    commentWrapperChild.append(hrline);
+
+    let commentWrapperChildForReply = document.createElement('div');
+    commentWrapperChildForReply.classList.add("commentWrapperChildForReply");
+    commentWrapperChild.append(commentWrapperChildForReply);
+
+    
+
+
+    
+    let commentD = document.createElement('div');
+    commentD.classList.add('comment');
+    commentD.id = "comment_" + comment.id;
+
+    let avatarImgAndNameDiv = document.createElement("div");
+    avatarImgAndNameDiv.classList.add("avatarImgAndNameDiv");
+    commentD.append(avatarImgAndNameDiv);
+
+    let headerImage = document.createElement("img");
+    headerImage.classList.add("headerImage");
+    headerImage.setAttribute("src", comment.user.image.png);
+    avatarImgAndNameDiv.append(headerImage);
+
+    let avatarNames = document.createElement("p");
+    avatarNames.classList.add("avatarNames");
+    avatarNames.innerHTML = comment.user.username;
+    avatarImgAndNameDiv.append(avatarNames);
+
+    let datesOfComments = document.createElement("p");
+    datesOfComments.innerHTML = comment.createdAt;
+    datesOfComments.classList.add("datesOfComments");
+    avatarImgAndNameDiv.append(datesOfComments);
+
+    let contentText = document.createElement("p");
+    contentText.innerHTML = comment.content;
+    contentText.classList.add("contentText");
+    commentD.append(contentText);
+
+    let incrDecrementAndReply = document.createElement("div");
+    incrDecrementAndReply.classList.add("incrDecrementAndReply");
+    commentD.append(incrDecrementAndReply);
+
+    let incrDecrement = document.createElement("div");
+    incrDecrement.classList.add("incrDecrement");
+    incrDecrementAndReply.append(incrDecrement);
+
+    let imgplus = document.createElement("img");
+    imgplus.classList.add("imgplus");
+    imgplus.setAttribute("src", "./images/icon-plus.svg");
+    incrDecrement.append(imgplus);
+
+    let incDecrText = document.createElement("p");
+    incDecrText.innerHTML = comment.score;
+    incDecrText.classList.add("incDecrText");
+    incDecrText.classList.add("forrotate");
+    incrDecrement.append(incDecrText);
+
+    let imgminus = document.createElement("img");
+    imgminus.classList.add("imgminus");
+    imgminus.setAttribute("src", "./images/icon-minus.svg");
+    incrDecrement.append(imgminus);
+    if(avatarNames.innerHTML !== "juliusomo"){
+    let reply = document.createElement("div");
+    reply.classList.add("reply");
+    incrDecrementAndReply.append(reply);
+  reply.addEventListener('click', function(event){
+
+    
+    if(sendButtonAndImg.style.display === "none"){
+      sendButtonAndImg.style.display = "flex";
+        
+}else{sendButtonAndImg.style.display = "none";
+}
+
+});
+
+    let replyimg = document.createElement("img");
+    replyimg.setAttribute("src", "./images/icon-reply.svg");
+    replyimg.classList.add("replyimg");
+    reply.append(replyimg);
+
+    let replyText = document.createElement("p");
+    replyText.innerHTML = "Reply";
+    replyText.classList.add("replyText");
+    reply.append(replyText);
+  } 
+  
+    if(avatarNames.innerHTML === "juliusomo"){
+      incrDecrement.classList.add("incrDecrementALastaa")
+
+      let deleteAndReply = document.createElement("div");
+      deleteAndReply.classList.add("deleteAndReply");
+      commentWrapper.append(deleteAndReply);
+
+      let deleteF = document.createElement("div");
+      deleteF.classList.add("deleteF");
+      deleteAndReply.append(deleteF);
+      deleteF.addEventListener('click', function(event){
+          deleteDiv.style.display = "flex";
+          deleteDiv.style.background = "rgba(255,255,255, 1)";
+          backdrop.style.display = "block";
+          backdrop.style.height = "1500px";
+          currentDivClick = event.target.parentElement.parentElement.parentElement;
+          console.log(currentDivClick);
+      });
+
+      deletButtonsred.addEventListener('click', function(event){
+        deleteDiv.style.display = "none";
+        backdrop.style.display = "none";
+        currentDivClick.remove();
+        
+      });
+
+      let deleteimg = document.createElement("img");
+      deleteimg.classList.add("deleteimg");
+      deleteimg.setAttribute("src", "./images/icon-delete.svg");
+      deleteF.append(deleteimg);
+
+      let deleteText = document.createElement("p");
+      deleteText.innerHTML = "Delete";
+      deleteText.classList.add("deleteText");
+      deleteF.append(deleteText);
+
+      let repl = document.createElement("div");
+          repl.classList.add("reply");
+          deleteAndReply.append(repl);
+
+          let replyimg = document.createElement("img");
+          replyimg.classList.add("edit");
+          replyimg.setAttribute("src", "./images/icon-edit.svg");
+          repl.append(replyimg);
+
+          let replyText = document.createElement("p");
+          replyText.innerHTML = "Edit";
+          replyText.classList.add("replyText");
+          repl.append(replyText);
+    }
+    commentWrapper.append(commentD);
+    commentWrapper.append(commentWrapperChild);
+
+    let repliesWrapper = document.createElement('div');
+    repliesWrapper.classList.add('replies_wrapper');
+    repliesWrapper.id = "replies_wrapper_" + comment.id;
+
+
+
+    commentWrapperChildForReply.append(repliesWrapper);
+    comentsConteiner.append(commentWrapper);
+    
+    appendReplies(comment.replies, comment.id);
+
+
+
+    let sendButtonAndImg  = document.createElement("div");
+    sendButtonAndImg.classList.add("sendButtonAndImg");
+    commentWrapperChildForReply.append(sendButtonAndImg);
+
+    let imgFOOter = document.createElement("img");
+    imgFOOter.classList.add("imgMove");
+    imgFOOter.setAttribute("src", "./images/avatars/image-juliusomo.webp");
+    sendButtonAndImg.append(imgFOOter);
+    
+    let textArea = document.createElement("textarea");
+    textArea.classList.add("textArea");
+    textArea.placeholder = "Add a comment…";
+    textArea.id = "textarea_" + comment.id;
+    textArea.value = "@" + comment.user.username;
+    sendButtonAndImg.append(textArea);
+    
+
+    let buttonSend = document.createElement("button");
+    buttonSend.classList.add("buttonSend");
+    buttonSend.innerText = "Reply";
+    sendButtonAndImg.append(buttonSend);
+
+    buttonSend.addEventListener('click', function(event) {
+        let replyTextArea = document.getElementById('textarea_' + comment.id);
+        // console.log("First value: ", replyTextArea.value, comment.id, comment.user.username);
+        addReplyNew(textArea.value, comment);
+    });
+}
 
 
 
@@ -473,6 +687,9 @@ document.getElementById('comment_send_btn').addEventListener('click', function(e
     addCommentNew();
     document.getElementById("comment_textArea").value = "";
 });
+
+
+
 
 function drawComment(comment) {
     // console.log("Comment: ", comment)
