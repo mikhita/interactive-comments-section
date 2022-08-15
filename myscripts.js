@@ -7,8 +7,15 @@ let backdrop = document.querySelector(".backdrop");
 let deletButtons = document.querySelector(".deletButtons");
 let deletButtonsred = document.querySelector(".deletButtonsred");
 let replyId = 4;
+let currentDivClick;
 
-
+// deletButtonsred.addEventListener('click', function(event){
+//   // deleteDiv.style.display = "none";
+//   // backdrop.style.display = "none";
+  
+    
+  
+// });
 
 
 deletButtons.addEventListener('click', function(event){
@@ -53,12 +60,15 @@ function addReplyNew(replyComment, comment) {
         replyBigDiv.classList.add('replyBigDivAfter');
         replyBigDiv.id = "reply_" + replyId;
         
-deletButtonsred.addEventListener('click', function(event){
-  deleteDiv.style.display = "none";
-  backdrop.style.display = "none";
-  replyBigDiv.remove();
+// deletButtonsred.addEventListener('click', function(event){
+//   deleteDiv.style.display = "none";
+//   backdrop.style.display = "none";
   
-});
+//   replyBigDiv.remove();
+  
+  
+  
+// });
         let headerOfConteiners = document.createElement("div");
         headerOfConteiners.classList.add("headerOfConteiner");
         replyBigDiv.append(headerOfConteiners);
@@ -134,7 +144,24 @@ deletButtonsred.addEventListener('click', function(event){
               deleteDiv.style.background = "rgba(255,255,255, 1)";
               backdrop.style.display = "block";
               backdrop.style.height = "1500px";
+              currentDivClick = event.target.parentElement.parentElement.parentElement;
+              
+              
+              // replyBigDiv.remove();
+              
+                
+              
           });
+
+          deletButtonsred.addEventListener('click', function(event){
+              deleteDiv.style.display = "none";
+              backdrop.style.display = "none";
+              
+              currentDivClick.remove();
+              
+              
+              
+            });
 
           let deleteimg = document.createElement("img");
           deleteimg.classList.add("deleteimg");
@@ -244,17 +271,8 @@ function appendReplies(replies, commentId) {
         reply.id = "reply_" + replies[i].id;
         repliesWrapper.append(reply);
 
-        // deletButtonsred.addEventListener('click', function(event){
-        //   deleteDiv.style.display = "none";
-        //   backdrop.style.display = "none";
-         
-        //   if(reply.id === "reply_4" ){
-        //     reply.remove();
-
-        //   }
-          
-          
-        // });
+        
+        
 
         let headerOfConteiner = document.createElement("div");
         headerOfConteiner.classList.add("headerOfConteiner");
@@ -375,6 +393,15 @@ function appendReplies(replies, commentId) {
               deleteDiv.style.background = "rgba(255,255,255, 1)";
               backdrop.style.display = "block";
               backdrop.style.height = "1500px";
+              currentDivClick = event.target.parentElement.parentElement.parentElement;
+              console.log(currentDivClick);
+          });
+
+          deletButtonsred.addEventListener('click', function(event){
+            deleteDiv.style.display = "none";
+            backdrop.style.display = "none";
+            currentDivClick.remove();
+            
           });
 
           let deleteimg = document.createElement("img");
@@ -412,11 +439,11 @@ function appendReplies(replies, commentId) {
 
 function addCommentNew() {
     let newComment = document.getElementById('comment_textArea').value;
-    console.log("Current: ", data.currentUser);
+    // console.log("Current: ", data.currentUser);
 
     let commentsContainer = document.getElementById('comentsConteiner');
 
-    console.log("asd", commentsContainer);
+    // console.log("asd", commentsContainer);
 
     replyId += 1;
 
@@ -447,7 +474,7 @@ document.getElementById('comment_send_btn').addEventListener('click', function(e
 });
 
 function drawComment(comment) {
-    console.log("Comment: ", comment)
+    // console.log("Comment: ", comment)
     let commentWrapper = document.createElement('div');
     commentWrapper.classList.add("comment_wrapper");
     commentWrapper.id = "comment_wrapper_" + comment.id;
@@ -523,7 +550,7 @@ function drawComment(comment) {
     reply.classList.add("reply");
     incrDecrementAndReply.append(reply);
     reply.addEventListener('click', function(event){
-        console.log(sendButtonAndImg.style.display);
+        // console.log(sendButtonAndImg.style.display);
         
         if(sendButtonAndImg.style.display === "none"){
           sendButtonAndImg.style.display = "flex";
@@ -582,7 +609,7 @@ function drawComment(comment) {
 
     buttonSend.addEventListener('click', function(event) {
         let replyTextArea = document.getElementById('textarea_' + comment.id);
-        console.log("First value: ", replyTextArea.value, comment.id, comment.user.username);
+        // console.log("First value: ", replyTextArea.value, comment.id, comment.user.username);
         addReplyNew(textArea.value, comment);
     });
 }
