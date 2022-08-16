@@ -360,6 +360,13 @@ body{
     padding: 16px;
     max-width: 630px;
 }
+.replyiesNew{
+    background-color: white;
+    border-radius: 8px;
+    margin-top: 16px;
+    padding: 16px;
+    max-width: 630px;
+}
 .replyBigDivAfter{
     display: flex;
     flex-direction: column;
@@ -452,8 +459,11 @@ body{
         bottom: 140px;
         
     }
-
-    .replyies, .replyBigDivAfter{
+    #update{
+        position: relative;
+        left:363px;
+    }
+    .replyies, .replyBigDivAfter, .replyiesNew{
         padding-left: 80px;
     }
     .repl{
