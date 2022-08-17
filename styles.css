@@ -142,8 +142,8 @@ body{
     margin-top: 16px;
     margin-bottom: 16px;
     word-wrap: break-word;
-    height: 65px;
-    overflow-y: scroll;
+    height: 75px;
+    overflow-y: auto;
      
 }
 .incrDecrement{
@@ -527,6 +527,6 @@ body{
         
     }
     .contentText{
-        height: 65px;
+        height: 75px;
     }
 }

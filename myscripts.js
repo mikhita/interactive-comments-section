@@ -211,8 +211,9 @@ function addReplyNew(replyComment, comment) {
           contentText.classList.add("contentText");
           textAreaEmty.replaceWith(contentText);
           
+          
         });
-
+console.log(repliesWrapper);
         repliesWrapper.append(replyBigDiv);
 
 
@@ -251,6 +252,14 @@ function addReplyNew(replyComment, comment) {
         buttonSend.classList.add("buttonSend");
         buttonSend.innerText = "Reply";
         sendButtonAndImg.append(buttonSend);
+        
+        document.querySelector(".buttonSend").addEventListener('click', function(event){
+          
+                  let replyTextArea = document.getElementById('textarea_' + replies[i].id);
+                  addReplyNew(textArea.value, comment);
+                  sendButtonAndImg.remove();
+                  repl.disabled = false;
+        })
         
         
 
@@ -347,7 +356,7 @@ function appendReplies(replies, commentId) {
         
 
         if(avatarNames.innerHTML !== "juliusomo"){
-          let repl = document.createElement("div");
+          let repl = document.createElement("button");
           repl.classList.add("repl");
           incrDecrementAndReply.append(repl);
           let sendButtonAndImg = document.createElement("div");
@@ -375,11 +384,46 @@ function appendReplies(replies, commentId) {
 
 
             repl.addEventListener('click', function(event){
-            if(sendButtonAndImg.style.display === "none"){
-              sendButtonAndImg.style.display = "flex";
+              let sendButtonAndImg  = document.createElement("div");
+              sendButtonAndImg.classList.add("sendButtonAndImg");
+              repliesWrapper.append(sendButtonAndImg);
+      
+              let imgFOOter = document.createElement("img");
+              imgFOOter.classList.add("imgMove");
+              imgFOOter.setAttribute("src", "./images/avatars/image-juliusomo.webp");
+              sendButtonAndImg.append(imgFOOter);
+              
+              let textArea = document.createElement("textarea");
+              textArea.classList.add("textArea");
+              textArea.placeholder = "Add a comment…";
+              textArea.id = "textarea_" + replies[i].id;
+              textArea.value = "@" + replies[i].user.username;
+              sendButtonAndImg.append(textArea);
+              
+      
+              let buttonSend = document.createElement("button");
+              buttonSend.classList.add("buttonSend");
+              buttonSend.innerText = "Reply";
+              sendButtonAndImg.append(buttonSend);
+      
+              buttonSend.addEventListener('click', function(event) {
                 
-              }else{sendButtonAndImg.style.display = "none";
-              }
+                let commentInput = data.comments.find((element)=>element.replies.find((reply)=>reply.id===replies[i].id))
+                console.log(commentInput);
+                  let replyTextArea = document.getElementById('textarea_' + replies[i].id);
+                  addReplyNew(textArea.value, commentInput);
+                  sendButtonAndImg.remove();
+                  repl.disabled = false;
+              });
+              repl.disabled = true;
+          if(sendButtonAndImg.style.display === "flex"){
+      
+            sendButtonAndImg.style.display = "none";
+            
+          }else{sendButtonAndImg.style.display = "flex";
+          
+          
+          }
             });
 
             document.getElementById('buttonSend_3').addEventListener('click', function(event) { 
@@ -455,6 +499,34 @@ function appendReplies(replies, commentId) {
           replyText.innerHTML = "Edit";
           replyText.classList.add("replyText");
           repl.append(replyText);
+          let textAreaEmty = document.getElementById("textarea_3");
+          
+          repl.addEventListener('click', function(event){
+            let editButtonClick;
+             console.log(event.target,event.target.parentElement );
+            if(event.target === repl){
+              editButtonClick = event.target.parentElement.previousElementSibling.previousElementSibling;
+            }else{
+              editButtonClick = event.target.parentElement.parentElement.previousElementSibling.previousElementSibling;
+            }
+            
+            textAreaEmty.value = replies[i].content;
+            editButtonClick.replaceWith(textAreaEmty);
+          })
+          
+        let update = document.createElement("button");
+        update.classList.add("buttonSend");
+        update.id = "update";
+        update.innerText = "Update";
+        reply.append(update);
+        update.addEventListener('click', function(event){
+          let contentText = document.createElement("p");
+          contentText.innerHTML = textAreaEmty.value;
+          contentText.classList.add("contentText");
+          textAreaEmty.replaceWith(contentText);
+          
+          
+        });
       }
 
     } 
@@ -700,18 +772,48 @@ function drawComment(comment) {
     imgminus.setAttribute("src", "./images/icon-minus.svg");
     incrDecrement.append(imgminus);
     if(avatarNames.innerHTML !== "juliusomo"){
-    let reply = document.createElement("div");
+    let reply = document.createElement("button");
     reply.classList.add("reply");
     incrDecrementAndReply.append(reply);
-  reply.addEventListener('click', function(event){
+    reply.addEventListener('click', function(event){
+        let sendButtonAndImg  = document.createElement("div");
+        sendButtonAndImg.classList.add("sendButtonAndImg");
+        commentWrapperChildForReply.append(sendButtonAndImg);
 
-    
-    if(sendButtonAndImg.style.display === "none"){
-      sendButtonAndImg.style.display = "flex";
+        let imgFOOter = document.createElement("img");
+        imgFOOter.classList.add("imgMove");
+        imgFOOter.setAttribute("src", "./images/avatars/image-juliusomo.webp");
+        sendButtonAndImg.append(imgFOOter);
         
-}else{sendButtonAndImg.style.display = "none";
-}
+        let textArea = document.createElement("textarea");
+        textArea.classList.add("textArea");
+        textArea.placeholder = "Add a comment…";
+        textArea.id = "textarea_" + comment.id;
+        textArea.value = "@" + comment.user.username;
+        sendButtonAndImg.append(textArea);
+        
 
+        let buttonSend = document.createElement("button");
+        buttonSend.classList.add("buttonSend");
+        buttonSend.innerText = "Reply";
+        sendButtonAndImg.append(buttonSend);
+
+        buttonSend.addEventListener('click', function(event) {
+            let replyTextArea = document.getElementById('textarea_' + comment.id);
+            addReplyNew(textArea.value, comment);
+            sendButtonAndImg.remove();
+            reply.disabled = false;
+        });
+        reply.disabled = true;
+    if(sendButtonAndImg.style.display === "flex"){
+
+      sendButtonAndImg.style.display = "none";
+      
+    }else{sendButtonAndImg.style.display = "flex";
+    
+    
+    }
+    
 });
 
     let replyimg = document.createElement("img");
@@ -812,10 +914,12 @@ function drawComment(comment) {
     buttonSend.innerText = "Reply";
     sendButtonAndImg.append(buttonSend);
 
-    buttonSend.addEventListener('click', function(event) {
-        let replyTextArea = document.getElementById('textarea_' + comment.id);
-        // console.log("First value: ", replyTextArea.value, comment.id, comment.user.username);
-        addReplyNew(textArea.value, comment);
+    document.querySelector(".buttonSend").addEventListener('click', function(event) {
+        // let replyTextArea = document.getElementById('textarea_' + comment.id);
+        // // console.log("First value: ", replyTextArea.value, comment.id, comment.user.username);
+        // addReplyNew(textArea.value, comment);
+        // sendButtonAndImg.remove();
+        
     });
 }
 
