@@ -552,121 +552,13 @@ function appendRepliesNew(misha, textContent){
     }
   }
   misha.push(replies);
-      //   let reply = document.querySelector(".replyies");
-      //   reply.classList.add("replyiesNew");
-        
-        
-
-      //   let headerOfConteiner = document.createElement("div");
-      //   headerOfConteiner.classList.add("headerOfConteiner");
-      //   reply.append(headerOfConteiner);
-
-      //   let headerImage = document.createElement("img");
-      //   headerImage.classList.add("headerImage");
-      //   headerImage.setAttribute("src", replies.user.image.png);
-      //   headerOfConteiner.append(headerImage);
-
-      //   let avatarNames = document.createElement("p");
-      //   avatarNames.classList.add("avatarNames");
-      //   avatarNames.innerHTML = replies.user.username;
-      //   headerOfConteiner.append(avatarNames);
-
-      //   if(avatarNames.innerHTML === "juliusomo"){
-      //     let you = document.createElement("div");
-      //     you.classList.add("you");
-      //     you.innerText = "you";
-      //     headerOfConteiner.append(you);
-      // }
-
-      //   let datesOfComments = document.createElement("p");
-      //   datesOfComments.innerHTML = replies.createdAt;
-      //   datesOfComments.classList.add("datesOfComments");
-      //   headerOfConteiner.append(datesOfComments);
-
-      //   let contentText = document.createElement("p");
-      //   contentText.innerHTML = replies.content;
-      //   contentText.classList.add("contentText");
-      //   reply.append(contentText);
-
-      //   let incrDecrementAndReply = document.createElement("div");
-      //   incrDecrementAndReply.classList.add("incrDecrementAndReply");
-      //   reply.append(incrDecrementAndReply);
-
-        
-
-      //   let incrDecrement = document.createElement("div");
-      //   incrDecrement.classList.add("incrDecrement");
-      //   incrDecrementAndReply.append(incrDecrement);
-
-      //   let imgplus = document.createElement("img");
-      //   imgplus.classList.add("imgplus");
-      //   imgplus.setAttribute("src", "./images/icon-plus.svg");
-      //   incrDecrement.append(imgplus);
-
-      //   let incDecrText = document.createElement("p");
-      //   incDecrText.innerHTML = replies.score;
-      //   incDecrText.classList.add("incDecrText");
-      //   incrDecrement.append(incDecrText);
-
-      //   let imgminus = document.createElement("img");
-      //   imgminus.classList.add("imgminus");
-      //   imgminus.setAttribute("src", "./images/icon-minus.svg");
-      //   incrDecrement.append(imgminus);
-
-        
-
-      //   if(avatarNames.innerHTML !== "juliusomo"){
-      //     let repl = document.createElement("div");
-      //     repl.classList.add("repl");
-      //     incrDecrementAndReply.append(repl);
-      //     let sendButtonAndImg = document.createElement("div");
-      //       sendButtonAndImg.classList.add("sendButtonAndImg");
-      //       repliesWrapper.append(sendButtonAndImg);
-
-      //       let imgFOOter = document.createElement("img");
-      //       imgFOOter.classList.add("imgMove");
-      //       imgFOOter.setAttribute("src", "./images/avatars/image-juliusomo.webp");
-      //       sendButtonAndImg.append(imgFOOter);
-            
-      //       let textArea = document.createElement("textarea");
-      //       textArea.classList.add("textArea");
-      //       textArea.placeholder = "Add a comment…";
-      //       textArea.id = "textarea_" + replies.id;
-      //       textArea.value = "@" + replies.user.username;
-      //       sendButtonAndImg.append(textArea);
-            
-
-      //       let buttonSend = document.createElement("button");
-      //       buttonSend.classList.add("buttonSend");
-      //       buttonSend.id = "buttonSend_" + replies.id;
-      //       buttonSend.innerText = "Reply";
-      //       sendButtonAndImg.append(buttonSend);
-
-
-      //       // repl.addEventListener('click', function(event){
-      //       // if(sendButtonAndImg.style.display === "none"){
-      //       //   sendButtonAndImg.style.display = "flex";
-                
-      //       //   }else{sendButtonAndImg.style.display = "none";
-      //       //   }
-      //       // });
-      //       document.querySelector(".incrDecrementAndReply").style
-            
-      // }
-      // repliesWrapper.appendChild(reply);
-      console.log(data.comments[1].replies);
+      
 }
 
 
 
 function addCommentNew() {
     let newComment = document.getElementById('comment_textArea').value;
-    // console.log("Current: ", data.currentUser);
-
-    let commentsContainer = document.getElementById('comentsConteiner');
-
-    // console.log("asd", commentsContainer);
-
     replyId += 1;
 
     var misha =  {
@@ -685,22 +577,19 @@ function addCommentNew() {
           
         ]
       };
-
-
       drawComment(misha);
 }
 
 
 document.getElementById('comment_send_btn').addEventListener('click', function(event) {
     addCommentNew();
-    document.getElementById("comment_textArea").value = "";
+    document.getElementById("comment_textArea").value = "";   
 });
 
 
 
 
 function drawComment(comment) {
-    // console.log("Comment: ", comment)
     let commentWrapper = document.createElement('div');
     commentWrapper.classList.add("comment_wrapper");
     commentWrapper.id = "comment_wrapper_" + comment.id;
@@ -863,10 +752,38 @@ function drawComment(comment) {
       deleteText.classList.add("deleteText");
       deleteF.append(deleteText);
 
-      let repl = document.createElement("div");
+      let repl = document.createElement("button");
           repl.classList.add("reply");
           deleteAndReply.append(repl);
-
+          repl.addEventListener('click',function(event){
+            
+            let textArea = document.createElement("textarea");
+            textArea.classList.add("textArea");
+            textArea.placeholder = "Add a comment…";
+            textArea.id = "textarea_" + comment.id;
+            commentD.prepend(textArea);
+            let editButtonClick;
+                    if(event.target === repl){
+                      editButtonClick = event.target.parentElement.nextElementSibling.childNodes[2]; 
+                    }else{
+                      editButtonClick = event.target.parentElement.parentElement.nextElementSibling.childNodes[2];
+                    }
+                        textArea.value = editButtonClick.innerText;
+                        editButtonClick.replaceWith(textArea);
+                        repl.disabled = true;
+                        let update = document.createElement("button");
+                        update.classList.add("buttonSend");
+                        update.innerText = "Update";
+                        commentD.append(update);
+                        update.addEventListener('click', function(event){
+                        let contentText = document.createElement("p");
+                        contentText.innerHTML = textArea.value;
+                        contentText.classList.add("contentText");
+                        textArea.replaceWith(contentText);
+                        update.remove();
+                        repl.disabled = false;
+                      })
+          })
           let replyimg = document.createElement("img");
           replyimg.classList.add("edit");
           replyimg.setAttribute("src", "./images/icon-edit.svg");
@@ -913,13 +830,7 @@ function drawComment(comment) {
     buttonSend.classList.add("buttonSend");
     buttonSend.innerText = "Reply";
     sendButtonAndImg.append(buttonSend);
-
     document.querySelector(".buttonSend").addEventListener('click', function(event) {
-        // let replyTextArea = document.getElementById('textarea_' + comment.id);
-        // // console.log("First value: ", replyTextArea.value, comment.id, comment.user.username);
-        // addReplyNew(textArea.value, comment);
-        // sendButtonAndImg.remove();
-        
     });
 }
 

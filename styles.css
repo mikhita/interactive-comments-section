@@ -190,6 +190,8 @@ body{
     justify-content: space-between;
     align-items: center;
     width: 66px;
+    background-color: white;
+    border: none;
 }
 .avatarImgAndNameDiv{
     width: 245px;
@@ -384,6 +386,8 @@ body{
     align-items: center;
     position: relative;
     width: 66px;
+    background-color: white;
+    border: none;
 }
 .deleteAndReply{
     display: flex;
@@ -495,9 +499,11 @@ body{
     .reply{
         position: relative;
         bottom: 140px;
+        background-color: white;
+        border: none;
     }
     .comment{
-        height: 130px;
+        /* height: 190px; */
     }
     #comment_textArea{
         width: 60%;
@@ -529,4 +535,5 @@ body{
     .contentText{
         height: 75px;
     }
+    
 }
