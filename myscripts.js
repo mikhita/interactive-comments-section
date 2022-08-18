@@ -9,13 +9,6 @@ let deletButtonsred = document.querySelector(".deletButtonsred");
 let replyId = 4;
 let currentDivClick;
 
-// deletButtonsred.addEventListener('click', function(event){
-//   // deleteDiv.style.display = "none";
-//   // backdrop.style.display = "none";
-  
-    
-  
-// });
 
 
 deletButtons.addEventListener('click', function(event){
@@ -27,20 +20,20 @@ deletButtons.addEventListener('click', function(event){
 
 
 
+
 for(let i=0; i<data.comments.length; i++) {
     drawComment(data.comments[i]);
 }
 
-function addReplyNew(replyComment, comment) {
-
-    console.log("Comment: ", comment);
+function addReplyNew(area, comment) {
+console.log(area)
+    
 
     replyId += 1;
-    let textAreaEmty = document.getElementById("textarea_"+ comment.id);
-    textAreaEmty.value = "@" + comment.user.username;
+    let textAreaEmty = area;
     let replyObject = {
         "id": replyId,
-        "content": replyComment,
+        "content": area.value,
         "createdAt": "2 days ago",
         "score": 2,
         "replyingTo": "Mixita",
@@ -60,15 +53,6 @@ function addReplyNew(replyComment, comment) {
         replyBigDiv.classList.add('replyBigDivAfter');
         replyBigDiv.id = "reply_" + replyId;
         
-// deletButtonsred.addEventListener('click', function(event){
-//   deleteDiv.style.display = "none";
-//   backdrop.style.display = "none";
-  
-//   replyBigDiv.remove();
-  
-  
-  
-// });
         let headerOfConteiners = document.createElement("div");
         headerOfConteiners.classList.add("headerOfConteiner");
         replyBigDiv.append(headerOfConteiners);
@@ -96,7 +80,7 @@ function addReplyNew(replyComment, comment) {
         headerOfConteiners.append(datesOfComments);
 
         let contentText = document.createElement("p");
-        contentText.innerHTML = replyComment;
+        contentText.innerHTML = area.value;
         contentText.classList.add("contentText");
         replyBigDiv.append(contentText);
 
@@ -115,6 +99,7 @@ function addReplyNew(replyComment, comment) {
         imgplus.classList.add("imgplus");
         imgplus.setAttribute("src", "./images/icon-plus.svg");
         incrDecrement.append(imgplus);
+        
 
         let incDecrText = document.createElement("p");
         incDecrText.innerHTML = comment.score;
@@ -126,11 +111,40 @@ function addReplyNew(replyComment, comment) {
         imgminus.setAttribute("src", "./images/icon-minus.svg");
         incrDecrement.append(imgminus);
 
-        
-
-       
-        
+        let clickedButtonplus;
+        let clickedButtonminus;
+        imgplus.addEventListener('click', function(event){
+          clickedButtonplus=true;
+          imgminus.classList.remove("noHover");
+          if(clickedButtonminus===true){
+            incDecrText.innerHTML = parseInt(incDecrText.innerHTML)+2;
+            imgplus.classList.add("noHover");
+          }else{
+            incDecrText.innerHTML = parseInt(incDecrText.innerHTML)+1;
+            imgplus.classList.add("noHover");
+          }
           
+          
+        })
+        
+          imgminus.addEventListener('click', function(event){
+            clickedButtonminus=true;
+            imgplus.classList.remove("noHover");
+            if(clickedButtonplus===true){
+              incDecrText.innerHTML = parseInt(incDecrText.innerHTML)-2;
+              imgminus.classList.add("noHover");
+    
+            }else{
+              incDecrText.innerHTML = parseInt(incDecrText.innerHTML)-1;
+              imgminus.classList.add("noHover");
+    
+            }
+            
+            
+          })
+        
+       
+  
           let deleteAndReply = document.createElement("div");
           deleteAndReply.classList.add("deleteAndReply");
           deleteAndReply.classList.add("deleteAndReplyAfter");
@@ -140,26 +154,20 @@ function addReplyNew(replyComment, comment) {
           deleteF.classList.add("deleteF");
           deleteAndReply.append(deleteF);
           deleteF.addEventListener('click', function(event){
+            document.body.scrollTop = document.documentElement.scrollTop = 0;
+
               deleteDiv.style.display = "flex";
               deleteDiv.style.background = "rgba(255,255,255, 1)";
               backdrop.style.display = "block";
               backdrop.style.height = "1500px";
               currentDivClick = event.target.parentElement.parentElement.parentElement;
-              
-              
-              // replyBigDiv.remove();
-              
-                
-              
           });
 
           deletButtonsred.addEventListener('click', function(event){
+
               deleteDiv.style.display = "none";
-              backdrop.style.display = "none";
-              
+              backdrop.style.display = "none"; 
               currentDivClick.remove();
-              
-              
               
             });
 
@@ -188,32 +196,31 @@ function addReplyNew(replyComment, comment) {
           repl.append(replyText);
           repl.addEventListener('click', function(event){
             let editButtonClick;
-          console.log(event.target,event.target.parentElement );
             if(event.target === repl){
               editButtonClick = event.target.parentElement.previousElementSibling.previousElementSibling;
             }else{
               editButtonClick = event.target.parentElement.parentElement.previousElementSibling.previousElementSibling;
             }
-            
-            textAreaEmty.value = replyComment;
             editButtonClick.replaceWith(textAreaEmty);
-            // console.log(event.target.parentElement.parentElement.previousElementSibling.previousElementSibling);
-          });
-      
-        let update = document.createElement("button");
-        update.classList.add("buttonSend");
-        update.id = "update";
-        update.innerText = "Update";
-        replyBigDiv.append(update);
-        update.addEventListener('click', function(event){
-          let contentText = document.createElement("p");
-          contentText.innerHTML = textAreaEmty.value;
-          contentText.classList.add("contentText");
-          textAreaEmty.replaceWith(contentText);
-          
+            textAreaEmty.value = area.value;
+
+
+            let update = document.createElement("button");
+            update.classList.add("buttonSend");
+            update.id = "update";
+            update.innerText = "Update";
+            replyBigDiv.append(update);
+            update.addEventListener('click', function(event){
+            let contentText = document.createElement("p");
+            contentText.innerHTML = textAreaEmty.value;
+            contentText.classList.add("contentText");
+            textAreaEmty.replaceWith(contentText);
+            update.remove();
           
         });
-console.log(repliesWrapper);
+            
+          });
+      
         repliesWrapper.append(replyBigDiv);
 
 
@@ -226,7 +233,6 @@ console.log(repliesWrapper);
         comentsSendDiv.classList.add("comentsSendDiv");
         comentsSendDiv.classList.add("sizeofreply");
         
-        // 
 
         let textArea = document.createElement("textarea");
         textArea.classList.add("textArea");
@@ -254,32 +260,12 @@ console.log(repliesWrapper);
         sendButtonAndImg.append(buttonSend);
         
         document.querySelector(".buttonSend").addEventListener('click', function(event){
-          
                   let replyTextArea = document.getElementById('textarea_' + replies[i].id);
-                  addReplyNew(textArea.value, comment);
+                  addReplyNew(textArea, comment);
                   sendButtonAndImg.remove();
                   repl.disabled = false;
         })
         
-        
-
-
-        // let headerOfConteiner = document.createElement("div");
-        // headerOfConteiner.classList.add("headerOfConteiner");
-        // replyBigDiv.classList.add("mainConteinerReply");
-        // replyBigDiv.append(headerOfConteiner);
-
-        // let headerImage = document.createElement("img");
-        // headerImage.classList.add("headerImage");
-        // headerImage.setAttribute("src", data.currentUser.image.png);
-        // headerOfConteiner.append(headerImage);
-
-        // let avatarNames = document.createElement("p");
-        // avatarNames.classList.add("avatarNames");
-        // avatarNames.innerHTML = data.currentUser.username;
-        // headerOfConteiner.append(avatarNames);
-
-      
 
 }
 
@@ -293,9 +279,6 @@ function appendReplies(replies, commentId) {
         reply.classList.add('replyies');
         reply.id = "reply_" + replies[i].id;
         repliesWrapper.append(reply);
-
-        
-        
 
         let headerOfConteiner = document.createElement("div");
         headerOfConteiner.classList.add("headerOfConteiner");
@@ -353,6 +336,40 @@ function appendReplies(replies, commentId) {
         imgminus.setAttribute("src", "./images/icon-minus.svg");
         incrDecrement.append(imgminus);
 
+        let clickedButtonplus;
+    let clickedButtonminus;
+    imgplus.addEventListener('click', function(event){
+      clickedButtonplus=true;
+      imgminus.classList.remove("noHover");
+      if(clickedButtonminus===true){
+        incDecrText.innerHTML = parseInt(incDecrText.innerHTML)+2;
+        imgplus.classList.add("noHover");
+      }else{
+        incDecrText.innerHTML = parseInt(incDecrText.innerHTML)+1;
+        imgplus.classList.add("noHover");
+      }
+      
+      
+    })
+    
+      imgminus.addEventListener('click', function(event){
+        clickedButtonminus=true;
+        imgplus.classList.remove("noHover");
+        if(clickedButtonplus===true){
+          incDecrText.innerHTML = parseInt(incDecrText.innerHTML)-2;
+          imgminus.classList.add("noHover");
+
+        }else{
+          incDecrText.innerHTML = parseInt(incDecrText.innerHTML)-1;
+          imgminus.classList.add("noHover");
+
+        }
+        
+        
+      })
+        
+       
+
         
 
         if(avatarNames.innerHTML !== "juliusomo"){
@@ -407,11 +424,10 @@ function appendReplies(replies, commentId) {
               sendButtonAndImg.append(buttonSend);
       
               buttonSend.addEventListener('click', function(event) {
-                
                 let commentInput = data.comments.find((element)=>element.replies.find((reply)=>reply.id===replies[i].id))
-                console.log(commentInput);
+                
                   let replyTextArea = document.getElementById('textarea_' + replies[i].id);
-                  addReplyNew(textArea.value, commentInput);
+                  addReplyNew(event.target.previousElementSibling, commentInput);
                   sendButtonAndImg.remove();
                   repl.disabled = false;
               });
@@ -455,6 +471,9 @@ function appendReplies(replies, commentId) {
           deleteF.id = replies[i].id;
           deleteAndReply.append(deleteF);
           deleteF.addEventListener('click', function(event){
+            
+              document.body.scrollTop = document.documentElement.scrollTop = 0;
+         
               deleteDiv.style.display = "flex";
               deleteDiv.style.background = "rgba(255,255,255, 1)";
               backdrop.style.display = "block";
@@ -467,13 +486,9 @@ function appendReplies(replies, commentId) {
             deleteDiv.style.display = "none";
             backdrop.style.display = "none";
             currentDivClick.remove();
+
             let id = event.target.id;
             let index = data.comments[1].replies.findIndex((element)=>element.id == id)
-            // console.log(data.comments[1].replies);
-            // data.comments[1].push(replies); მასივიდან უნდა ამოშალო რიპლეიები წაშლისას
-            // data.comments[1].replies.splice(index, 1);
-            // console.log(data.comments[1].replies);
-            
           });
 
           let deleteimg = document.createElement("img");
@@ -503,7 +518,6 @@ function appendReplies(replies, commentId) {
           
           repl.addEventListener('click', function(event){
             let editButtonClick;
-             console.log(event.target,event.target.parentElement );
             if(event.target === repl){
               editButtonClick = event.target.parentElement.previousElementSibling.previousElementSibling;
             }else{
@@ -512,24 +526,27 @@ function appendReplies(replies, commentId) {
             
             textAreaEmty.value = replies[i].content;
             editButtonClick.replaceWith(textAreaEmty);
-          })
-          
-        let update = document.createElement("button");
-        update.classList.add("buttonSend");
-        update.id = "update";
-        update.innerText = "Update";
-        reply.append(update);
-        update.addEventListener('click', function(event){
-          let contentText = document.createElement("p");
-          contentText.innerHTML = textAreaEmty.value;
-          contentText.classList.add("contentText");
-          textAreaEmty.replaceWith(contentText);
-          
-          
-        });
-      }
 
-    } 
+
+            let update = document.createElement("button");
+            update.classList.add("buttonSend");
+            update.id = "update";
+            update.innerText = "Update";
+            reply.append(update);
+            update.addEventListener('click', function(event){
+            let contentText = document.createElement("p");
+            contentText.innerHTML = textAreaEmty.value;
+            contentText.classList.add("contentText");
+            textAreaEmty.replaceWith(contentText);
+            update.remove()
+          
+          });
+      })
+          
+        
+    }
+
+  } 
     
 }
 
@@ -660,6 +677,38 @@ function drawComment(comment) {
     imgminus.classList.add("imgminus");
     imgminus.setAttribute("src", "./images/icon-minus.svg");
     incrDecrement.append(imgminus);
+
+    let clickedButtonplus;
+    let clickedButtonminus;
+    imgplus.addEventListener('click', function(event){
+      clickedButtonplus=true;
+      imgminus.classList.remove("noHover");
+      if(clickedButtonminus===true){
+        incDecrText.innerHTML = parseInt(incDecrText.innerHTML)+2;
+        imgplus.classList.add("noHover");
+      }else{
+        incDecrText.innerHTML = parseInt(incDecrText.innerHTML)+1;
+        imgplus.classList.add("noHover");
+      }
+      
+      
+    })
+    
+      imgminus.addEventListener('click', function(event){
+        clickedButtonminus=true;
+        imgplus.classList.remove("noHover");
+        if(clickedButtonplus===true){
+          incDecrText.innerHTML = parseInt(incDecrText.innerHTML)-2;
+          imgminus.classList.add("noHover");
+
+        }else{
+          incDecrText.innerHTML = parseInt(incDecrText.innerHTML)-1;
+          imgminus.classList.add("noHover");
+
+        }
+        
+        
+      })
     if(avatarNames.innerHTML !== "juliusomo"){
     let reply = document.createElement("button");
     reply.classList.add("reply");
@@ -689,7 +738,7 @@ function drawComment(comment) {
 
         buttonSend.addEventListener('click', function(event) {
             let replyTextArea = document.getElementById('textarea_' + comment.id);
-            addReplyNew(textArea.value, comment);
+            addReplyNew(textArea, comment);
             sendButtonAndImg.remove();
             reply.disabled = false;
         });
@@ -727,18 +776,20 @@ function drawComment(comment) {
       deleteF.classList.add("deleteF");
       deleteAndReply.append(deleteF);
       deleteF.addEventListener('click', function(event){
-          deleteDiv.style.display = "flex";
-          deleteDiv.style.background = "rgba(255,255,255, 1)";
-          backdrop.style.display = "block";
-          backdrop.style.height = "1500px";
-          currentDivClick = event.target.parentElement.parentElement.parentElement;
-          console.log(currentDivClick);
+        document.body.scrollTop = document.documentElement.scrollTop = 0;
+
+            deleteDiv.style.display = "flex";
+            deleteDiv.style.background = "rgba(255,255,255, 1)";
+            backdrop.style.display = "block";
+            backdrop.style.height = "1500px";
+            currentDivClick = event.target.parentElement.parentElement.parentElement;
+            
       });
 
       deletButtonsred.addEventListener('click', function(event){
-        deleteDiv.style.display = "none";
-        backdrop.style.display = "none";
-        currentDivClick.remove();
+          deleteDiv.style.display = "none";
+          backdrop.style.display = "none";
+          currentDivClick.remove();
         
       });
 
@@ -833,4 +884,8 @@ function drawComment(comment) {
     document.querySelector(".buttonSend").addEventListener('click', function(event) {
     });
 }
+
+
+
+
 

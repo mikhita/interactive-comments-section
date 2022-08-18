@@ -45,8 +45,7 @@ Users should be able to:
 
 ### What I learned
 
-I learn how to import JSON files and how to create HTML elements from javascript
-To see how you can add code snippets, see below:
+I learn from this project how to built dynamiccaly intensive comments from javascript only, also I learn how to make multifunctional bindings and functions, I learn how to remove hovers, I learn what how elements are doing connections between each other, I learn how to find elements in from other functions, also I learn how to replace elements,how to append,prepend and so on, the most important what I learn is that it is better to plan your steps very well and after start doing that,because I spent a lot of time on debugging my mistakes .
 
 
 ### Useful resources

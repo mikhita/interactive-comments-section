@@ -44,6 +44,7 @@ body{
     flex-direction: column;
     justify-content: space-between;
     position: absolute;
+    top:20%;
     display: none;
 }
 .h1Text{
@@ -266,7 +267,9 @@ body{
     align-items: center;
 }
 .textArea{
-    width: 60%;
+    min-width: 60%;
+    max-width: 60%;
+    min-height: 96px;
     max-height: 96px;
     padding: 20px;
     font-family: Rubik;
@@ -412,6 +415,16 @@ body{
 .reply:hover .replyText{
     color:#C5C6EF;
 }
+.repl:hover{
+    cursor: pointer;
+}
+.repl:hover .replyText{
+    color:#C5C6EF;
+}
+.repl:hover .replyimg{
+    content: url(./images/replyhover.png);
+}
+
 .buttonSend{
     border: none;
 }
@@ -456,6 +469,27 @@ body{
     position: relative;
     bottom: -197px;
     right: 19px;
+}
+.replyBigDivAfter > .textArea{
+    margin-top: 16px;
+}
+.valueStyle{
+
+font-family: Rubik;
+font-size: 16px;
+font-weight: 500;
+line-height: 24px;
+letter-spacing: 0px;
+text-align: left;
+color: #5357B6;
+
+
+}
+.noHover{
+    pointer-events: none;
+}
+.comment > .textArea{
+    margin-top:16px;
 }
 @media only screen and (min-width: 800px){
     .deleteF{
@@ -502,11 +536,10 @@ body{
         background-color: white;
         border: none;
     }
-    .comment{
-        /* height: 190px; */
-    }
+    
     #comment_textArea{
-        width: 60%;
+        min-width: 60%;
+        max-width: 60%;
         position: relative;
         right: 30px;
     }
